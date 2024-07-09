@@ -2,10 +2,22 @@ using Microsoft.Extensions.Logging;
 
 namespace coding_problem.Services.Messaging.MessageChannels;
 
-public class SmsMessageChannel(ILogger<SmsMessageChannel> logger) : IMessageChannel
+public record PhoneNumber(string Value);
+
+public class SmsMessageChannel(ILogger<SmsMessageChannel> logger) : MessageChannelBase<PhoneNumber>
 {
-    public void SendMessage(string recipient, string message)
+    protected override PhoneNumber? ValidateAndCreateReceipient(string recipient)
     {
-        logger.LogInformation($"Sending SMS to {recipient}: {message}");
+        if (recipient.All(char.IsDigit))
+        {
+            return new PhoneNumber(recipient);
+        }
+
+        return null;
+    }
+
+    protected override void SendMessageInternal(PhoneNumber recipient, string message)
+    {
+        logger.LogInformation($"Sending SMS to {recipient.Value}: {message}");
     }
 }

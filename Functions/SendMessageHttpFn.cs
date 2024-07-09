@@ -28,14 +28,15 @@ namespace coding_problem
                 return new BadRequestObjectResult("Please provide recipient and message.");
             }
 
-            try
+            var response = messageService.SendMessage(channelType, recipient, message);
+            
+            if (response.IsSuccess)
             {
-                messageService.SendMessage(channelType, recipient, message);
                 return new OkObjectResult($"Message sent via {channelType} to {recipient}: {message}");
             }
-            catch (NotImplementedException ex)
+            else
             {
-                return new BadRequestObjectResult(ex.Message);
+                return new BadRequestObjectResult(response.ErrorMessage);
             }
         }
     }
