@@ -1,0 +1,6 @@
+@coding_problem_HostAddress = http://localhost:5247
+
+GET {{coding_problem_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
