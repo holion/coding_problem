@@ -1,4 +1,4 @@
-namespace coding_problem.Services.MessageChannels;
+namespace coding_problem.Services.Messaging.MessageChannels;
 
 public interface IMessageChannel
 {

@@ -2,7 +2,7 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using coding_problem.Services;
+using coding_problem.Services.Messaging;
 
 namespace coding_problem
 {

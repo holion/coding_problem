@@ -1,4 +1,4 @@
-namespace coding_problem.Services;
+namespace coding_problem.Services.Messaging;
 
 public enum ChannelType
 {

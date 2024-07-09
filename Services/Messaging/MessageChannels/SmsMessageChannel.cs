@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace coding_problem.Services.MessageChannels;
+namespace coding_problem.Services.Messaging.MessageChannels;
 
 public class SmsMessageChannel : IMessageChannel
 {
