@@ -2,17 +2,10 @@ using Microsoft.Extensions.Logging;
 
 namespace coding_problem.Services.Messaging.MessageChannels;
 
-public class SmsMessageChannel : IMessageChannel
+public class SmsMessageChannel(ILogger<SmsMessageChannel> logger) : IMessageChannel
 {
-    private readonly ILogger<SmsMessageChannel> _logger;
-    
-    public SmsMessageChannel(ILogger<SmsMessageChannel> logger)
-    {
-        _logger = logger;
-    }
-
     public void SendMessage(string recipient, string message)
     {
-        _logger.LogInformation($"Sending SMS to {recipient}: {message}");
+        logger.LogInformation($"Sending SMS to {recipient}: {message}");
     }
 }

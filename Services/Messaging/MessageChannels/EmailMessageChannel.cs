@@ -2,17 +2,10 @@ using Microsoft.Extensions.Logging;
 
 namespace coding_problem.Services.Messaging.MessageChannels;
 
-public class EmailMessageChannel : IMessageChannel
+public class EmailMessageChannel(ILogger<EmailMessageChannel> logger) : IMessageChannel
 {
-    private readonly ILogger<EmailMessageChannel> _logger;
-
-    public EmailMessageChannel(ILogger<EmailMessageChannel> logger)
-    {
-        _logger = logger;
-    }
-
     public void SendMessage(string recipient, string message)
     {
-        _logger.LogInformation($"Sending email to {recipient}: {message}");
+        logger.LogInformation($"Sending email to {recipient}: {message}");
     }
 }

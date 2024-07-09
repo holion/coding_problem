@@ -6,22 +6,14 @@ using coding_problem.Services.Messaging;
 
 namespace coding_problem
 {
-    public class SendMessageHttpFn
+    public class SendMessageHttpFn(
+        ILogger<SendMessageHttpFn> logger,
+        IMessageService messageService)
     {
-        private readonly ILogger<SendMessageHttpFn> _logger;
-        private readonly IMessageService _messagingService;
-
-        public SendMessageHttpFn(ILogger<SendMessageHttpFn> logger,
-            IMessageService messageService)
-        {
-            _logger = logger;
-            _messagingService = messageService;
-        }
-
         [Function("SendMessage")]
         public IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequest req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            logger.LogInformation("C# HTTP trigger function processed a request.");
 
             if (!Enum.TryParse<ChannelType>(req.Query["channel"], true, out var channelType))
             {
@@ -38,7 +30,7 @@ namespace coding_problem
 
             try
             {
-                _messagingService.SendMessage(channelType, recipient, message);
+                messageService.SendMessage(channelType, recipient, message);
                 return new OkObjectResult($"Message sent via {channelType} to {recipient}: {message}");
             }
             catch (NotImplementedException ex)
